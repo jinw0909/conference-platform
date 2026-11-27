@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity
@@ -58,6 +59,8 @@ public class SpeakerApplication {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+    private Instant emailVerifiedAt;
+
     public SpeakerApplication(
             Conference conference,
             String name,
@@ -76,5 +79,15 @@ public class SpeakerApplication {
         this.socialUrl = socialUrl;
         this.presentationContent = presentationContent;
         this.privacyAgreed = privacyAgreed;
+    }
+
+    public boolean isEmailVerified() {
+        return emailVerifiedAt != null;
+    }
+
+    public void verifyEmail(Instant now) {
+        if (!isEmailVerified()) {
+            this.emailVerifiedAt = now;
+        }
     }
 }

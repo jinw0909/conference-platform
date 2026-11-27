@@ -1,4 +1,6 @@
 package com.blocksquare.conference.domain.verification.enums;
 
-public class ApplicationType {
+public enum ApplicationType {
+    PARTNER,
+    SPEAKER,
 }

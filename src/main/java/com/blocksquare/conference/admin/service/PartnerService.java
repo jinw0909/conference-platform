@@ -1,4 +1,4 @@
 package com.blocksquare.conference.admin.service;
 
-public class BoothService {
+public class PartnerService {
 }

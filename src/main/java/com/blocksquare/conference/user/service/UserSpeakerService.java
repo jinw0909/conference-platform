@@ -5,10 +5,13 @@ import com.blocksquare.conference.domain.conference.repository.ConferenceReposit
 import com.blocksquare.conference.domain.speaker.entity.SpeakerApplication;
 import com.blocksquare.conference.domain.speaker.repository.ConferenceSpeakerRepository;
 import com.blocksquare.conference.domain.speaker.repository.SpeakerApplicationRepository;
+import com.blocksquare.conference.domain.verification.enums.ApplicationType;
+import com.blocksquare.conference.domain.verification.event.ApplicationEmailVerificationEvent;
 import com.blocksquare.conference.user.dto.ApplicationResponse;
 import com.blocksquare.conference.user.dto.SpeakerApplicationRequest;
 import com.blocksquare.conference.user.dto.SpeakerResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +28,8 @@ public class UserSpeakerService {
     private final ConferenceRepository conferenceRepository;
     private final ConferenceSpeakerRepository conferenceSpeakerRepository;
     private final SpeakerApplicationRepository speakerApplicationRepository;
+    private final ApplicationEmailVerificationService verificationService;
+    private final ApplicationEventPublisher eventPublisher;
 
     public List<SpeakerResponse> getSpeakers(Long conferenceId) {
 
@@ -83,6 +88,22 @@ public class UserSpeakerService {
 
         SpeakerApplication saved =
                 speakerApplicationRepository.save(application);
+
+        String rawToken = verificationService.issueInitialToken(
+                ApplicationType.SPEAKER,
+                saved.getId()
+        );
+
+        eventPublisher.publishEvent(
+                new ApplicationEmailVerificationEvent(
+                        ApplicationType.SPEAKER,
+                        saved.getId(),
+                        conference.getName(),
+                        saved.getName(),
+                        saved.getEmail(),
+                        rawToken
+                )
+        );
 
         return new ApplicationResponse(
                 saved.getId(),

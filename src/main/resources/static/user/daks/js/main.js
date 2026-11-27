@@ -1879,7 +1879,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     "디지털 자산 생태계 선도 기업들을 위한 전략적 파트너십 기회를 제공합니다. 디지털 자산의 미래를 함께 그려주세요.",
                 submitText: "부스 참가 신청하기",
                 successTitle: "부스 참가 신청이 완료되었습니다.",
-                endpoint: `${APPLICATION_API_BASE}/booth-applications`,
+                endpoint: `${APPLICATION_API_BASE}/partner-applications`,
                 fields: [
                     {
                         name: "company_name",

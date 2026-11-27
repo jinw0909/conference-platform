@@ -1,4 +1,4 @@
-package com.blocksquare.conference.domain.booth.entity;
+package com.blocksquare.conference.domain.partner.entity;
 
 import com.blocksquare.conference.domain.common.ApplicationStatus;
 import com.blocksquare.conference.domain.conference.entity.Conference;
@@ -9,13 +9,14 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "booth_application")
+@Table(name = "partner_application")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class BoothApplication {
+public class PartnerApplication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +48,10 @@ public class BoothApplication {
     @Column(nullable = false, length = 20)
     private ApplicationStatus status = ApplicationStatus.PENDING;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "conference_partner_id")
+    private ConferencePartner conferencePartner;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -55,7 +60,9 @@ public class BoothApplication {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    public BoothApplication(
+    private Instant emailVerifiedAt;
+
+    public PartnerApplication(
             Conference conference,
             String companyName,
             String email,
@@ -71,6 +78,16 @@ public class BoothApplication {
         this.contactName = contactName;
         this.operationPlan = operationPlan;
         this.privacyAgreed = privacyAgreed;
+    }
+
+    public boolean isEmailVerified() {
+        return emailVerifiedAt != null;
+    }
+
+    public void verifyEmail(Instant now) {
+        if (!isEmailVerified()) {
+            this.emailVerifiedAt = now;
+        }
     }
 
 }

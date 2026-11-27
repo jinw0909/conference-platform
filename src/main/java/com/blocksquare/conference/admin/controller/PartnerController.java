@@ -1,4 +1,4 @@
 package com.blocksquare.conference.admin.controller;
 
-public class BoothController {
+public class PartnerController {
 }

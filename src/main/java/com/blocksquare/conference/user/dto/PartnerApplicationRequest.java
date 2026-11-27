@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public record BoothApplicationRequest(
+public record PartnerApplicationRequest(
 
         @NotBlank(message = "회사/프로젝트명을 입력해주세요.")
         @Size(max = 200)
@@ -24,7 +24,7 @@ public record BoothApplicationRequest(
         @Size(max = 100)
         String contactName,
 
-        @NotBlank(message = "부스 운영 계획을 입력해주세요.")
+        @NotBlank(message = "참가 및 활동 계획을 입력해주세요.")
         @Size(max = 5000)
         String operationPlan,
 
