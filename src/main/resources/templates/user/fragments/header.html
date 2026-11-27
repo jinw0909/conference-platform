@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="ko" xmlns:th="http://www.thymeleaf.org"><body>
+<th:block th:fragment="header">
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" th:href="@{/}" aria-label="Digital Asset Korea Summit 메인으로">
+        <img th:src="@{/user/daks/images/logo-transparent.png}" alt="Digital Asset Korea Summit" width="202" height="32">
+      </a>
+      <nav class="desktop-nav michroma-regular" aria-label="주 메뉴">
+        <a href="/#about">About</a>
+        <a href="/#speakers">Speaker</a>
+        <a href="/#tickets">Tickets</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <a class="header-title wordmark michroma-regular" th:href="@{/aixsoftwave}">AI<span> x </span>SOFTWAVE</a>
+      <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="모바일 주 메뉴" hidden>
+    <a class="mobile-menu-title wordmark michroma-regular" th:href="@{/aixsoftwave}">AI<span> x </span>SOFTWAVE</a>
+    <a href="/#about">About</a>
+    <a href="/#speakers">Speaker</a>
+    <a href="/#tickets">Tickets</a>
+    <a href="/#faq">FAQ</a>
+  </nav>
+</th:block>
+</body></html>

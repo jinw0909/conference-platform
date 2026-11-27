@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer class="site-footer" th:fragment="footer">
+  <div class="container footer-inner">
+    <a class="brand" th:href="@{/}"><img th:src="@{/user/daks/images/logo-transparent.png}" alt="DAKS 로고"></a>
+    <div class="company-info">
+      <p><strong>주식회사 에이비비(ABB Co., Ltd.)</strong><span>|</span> 서울특별시 서초구 서초동 1328-7</p>
+      <p>대표: 정주필 <span>|</span> 사업자 등록번호 : 817-86-02211 <span>|</span> 통신판매업신고 : 2021-서울서초-3952</p>
+    </div>
+    <div class="social-icons">
+      <a href="https://x.com/bctoday_office" target="_blank" rel="noopener noreferrer" aria-label="X"><img th:src="@{/user/daks/images/x.svg}" alt="X"></a>
+      <a href="https://www.youtube.com/@blockchaintoday.official" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img th:src="@{/user/daks/images/you.svg}" alt="YouTube"></a>
+    </div>
+  </div>
+  <div class="container copyright">
+    <p>©2026 DIGITAL ASSET KOREA SUMMIT. All rights reserved</p>
+    <nav class="footer-policy-links" aria-label="약관 및 정책" th:if="${pageType == 'daks'}">
+<!--    <nav class="footer-policy-links" aria-label="약관 및 정책">-->
+      <button type="button" class="js-open-legal-modal" data-legal-tab="terms">이용약관</button>
+      <button type="button" class="js-open-legal-modal" data-legal-tab="privacy">개인정보처리방침</button>
+      <button type="button" class="js-open-legal-modal" data-legal-tab="refund">취소 및 환불규정</button>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
